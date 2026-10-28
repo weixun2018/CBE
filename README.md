@@ -1,54 +1,39 @@
-# EnhancedEnsemble
-An enhanced ensemble framework for imbalance learning.
-- Random Feature Subspace(RFS)
-- Distance Weighted Under-Sampling(DWUS)
+# CBE
+A complexity-adaptive boundary-aware ensemble framework for imbalance learning.
+- Overall Complexity Measure(OCM)
+- Complexity-adaptive Distance-weighted Sampling(CDWS)
+- Complexity-adaptive Boundary-aware Ensemble(CBE)
 
 ## Method
-- randomly selects a feature subspace; 
-- then weighted undersamples majority instances to create a balanced training subset; 
-- finally trains base classifiers on multiple subsets and obtains the ensemble model.
+- Calculate the OCM of datasets; 
+- CDWS the majority class instances according to OCM to create balanced subsets; 
+- Trains base classifiers on multiple subsets and obtains the ensemble model.
 
-Example of DWUS:
-![Example of DWUS](./figures/dwus-examples.png)
+Example of CDWS:
+![Example of DWUS](./figures/cdws-examples.pdf)
 
 Overview of EnhanceEnsemble:
-![Overview of EnhanceEnsemble](./figures/EnhancedEnsemble.png)
+![Overview of EnhanceEnsemble](./figures/CBE_overview.pdf)
 
 ## Datasets
-
-|Dataset|Size|Feature|Target|Ratio|
-|:--:|:--:|:--:|:--:|:--:|
-|Abalone|4177|10|11|7.6|
-|Bank|7842|47|yes|7.5|
-|Isolet|7797|617|1|25.0|
-|Musk2|6598|166|1|5.5|
-|Vehicle|845|18|van|3.3|
-|Wave|5000|21|1|2.0|
-|Wine|6497|11|7|5.0|
-|Yeast|1484|8|ME2| 28.0|
-|Mfeat-Fac| 2000| 216| 0| 9.0|
-|Mfeat-Pix| 2000| 240| 0| 9.0|
-|Mfeat-Kar| 2000| 64| 0| 9.0|
-|Mfeat-Fou| 2000| 76| 0| 9.0|
+![Datasets](./figures/datasets.png)
 
 ## Metrics
-- AUC
-- G-mean
 - F-measure
+- G-mean
+
 
 ## Results
-We compare our method `EnhancedEnsemble` with other 8 methods in terms of AUC, G-mean and F-measure on 12 UCI datasets.
+First we prove the effectness of OCM.
+![Pearson Correlation between OCM and classifier performance](./figures/correlation_metrics.pdf)
 
-![Average ranks of all methods and critical difference diagram for the Nemenyi test.](./figures/friedman-test.png)
+We compare our method `CBE` with other methods in terms ofG-mean and F-measure on 24 UCI&KEEL datasets.
 
-## Ablation Study
-- To quantify the individual contributions of DWUS and RFS in the `EnhancedEnsemble` framework, we design a controlled ablation study.
+![Average ranks of all methods and critical difference diagram for the Nemenyi test.](./figures/friedman-test.pdf)
 
-![Comparison of Model Performance with and without DWUS and RFS.](./figures/DWUS_and_RFS.png)
+We also demonstrate the difference of three sample strategies on three categories datasets.
 
-- Besides, we discover the sensitivity of α value across 12 datasets to reveal its importance for `EnhancedEnsemble`
-
-![Sensitivity of Feature Sampling Rate(α) to Model Performance.](./figures/alpha-sensitivity.png)
+![F-measure and G-mean of different sampling strategies on the three categories of datasets.](./figures/three_sampling.pdf)
 
 
 ## How to use
